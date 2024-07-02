@@ -83,6 +83,7 @@ public class Main {
         class1.showInfoClass();
     }
 
+    // Hien thi tat ca sinh vien thuoc mot giao vien
     public static void showStudentByTeacher(ArrayList<ClassRoom> classRooms, Teacher tc) {
         for (ClassRoom c : classRooms) {
             if (c.getTeachers().contains(tc)) {
@@ -91,6 +92,7 @@ public class Main {
         }
     }
 
+    // Hien thi thong tin cua tat ca cac lop hien tai
     public static void showInfoAllClass(ArrayList<ClassRoom> classRooms) {
         // Show thong tin lop hoc
         for (ClassRoom cl : classRooms) {
@@ -98,6 +100,7 @@ public class Main {
         }
     }
 
+    // Hien thi thong tin cua lop nao do
     public static void showInfoClass(ClassRoom cl) {
         cl.showInfoClass();
     }
