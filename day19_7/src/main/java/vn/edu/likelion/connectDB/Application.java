@@ -11,6 +11,7 @@ import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
 import java.sql.*;
+import java.util.Base64;
 import java.util.Scanner;
 
 public class Application {
@@ -56,6 +57,7 @@ public class Application {
 					break;
 				case 4:
 					diemDanh();
+					break;
 				case 5:
 					run = false;
 					break;
@@ -74,17 +76,19 @@ public class Application {
 		ResultSet resultSet = null;
 		PreparedStatement stat;
 		try {
-		 	conn = new MyConnect();
-			 stat = conn.openConnect().prepareStatement(query);
-			 stat.setString(1, username);
-			 stat.setString(2, password);
-			 resultSet = stat.executeQuery();
-			 if (resultSet.next()) {
-				 System.out.println(resultSet.getString(3));
-				 roleId = Integer.parseInt(resultSet.getString(4));
-			 } else {
-				 login();
-			 }
+			conn = new MyConnect();
+			stat = conn.openConnect().prepareStatement(query);
+			String passwordEncode = Base64.getEncoder().encodeToString(password.getBytes());
+
+			stat.setString(1, username);
+			stat.setString(2, passwordEncode);
+			resultSet = stat.executeQuery();
+			if (resultSet.next()) {
+				System.out.println(resultSet.getString(3));
+				roleId = Integer.parseInt(resultSet.getString(4));
+			} else {
+			 	login();
+			}
 
 		} catch (Exception e) {
 			e.printStackTrace();
