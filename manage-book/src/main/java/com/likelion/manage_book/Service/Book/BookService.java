@@ -228,8 +228,10 @@ public class BookService implements BaseServiceInterface<BookEntity> {
     }
 
     public List<BookEntity> paginate(int page, int limit) {
-        page -= 1;
-
-        return bookRepository.paginate(page, limit);
+        int currPage = 0;
+        if (page >= 2) {
+            currPage = (page - 1) * limit;
+        }
+        return bookRepository.paginate(currPage, limit);
     }
 }
